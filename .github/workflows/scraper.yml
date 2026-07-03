@@ -1,0 +1,33 @@
+name: Run Scraper Daily
+
+on:
+  schedule:
+    - cron: '30 20 * * *'
+  workflow_dispatch:
+
+jobs:
+  scrape-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. Clone the repo on the virtual machine
+      uses: actions/checkout@v3
+
+    - name: 2. Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: 3. Install dependencies
+      run: pip install requests beautifulsoup4
+
+    - name: 4. Run scraper.py
+      run: python scraper.py
+
+    - name: 5. Salvează fișierele CSV generate înapoi în GitHub
+      run: |
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "actions@github.com"
+        git add data_*.csv
+        git commit -m "Update $(date +'%Y-%m-%d') [skip ci]" || exit 0
+        git push
