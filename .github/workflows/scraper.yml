@@ -24,7 +24,7 @@ jobs:
     - name: 4. Run scraper.py
       run: python scraper.py
 
-    - name: 5. Salvează fișierele CSV generate înapoi în GitHub
+    - name: 5. Save the CSV files on github
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
