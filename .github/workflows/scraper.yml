@@ -24,10 +24,10 @@ jobs:
     - name: 4. Run scraper.py
       run: python scraper.py
 
-    - name: 5. Save the CSV files on github
+    - name: 5. Save the CSV files on Github
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
-        git add data_*.csv
+        git add data/*.csv
         git commit -m "Update $(date +'%Y-%m-%d') [skip ci]" || exit 0
         git push

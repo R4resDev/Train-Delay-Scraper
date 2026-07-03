@@ -75,7 +75,8 @@ for url in urls:
         if li.has_attr("id") and li["id"].startswith("li-itinerary-"):
             trains.append(li)
 
-    csv_file = f"data_{departureStationName}_{arrivalStationName}.csv"
+    os.makedirs("data", exist_ok=True)
+    csv_file = f"data/{departureStationName}_{arrivalStationName}.csv"
     file_exists = os.path.isfile(csv_file)
     with open(csv_file, "a", encoding="utf-8") as f:
         if not file_exists:
