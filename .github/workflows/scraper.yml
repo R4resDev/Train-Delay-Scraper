@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: 1. Clone the repo on the virtual machine
-      uses: actions/checkout@v3
+      uses: actions/checkout@v7
 
     - name: 2. Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.12'
+        python-version: '3.13'
 
     - name: 3. Install dependencies
       run: pip install requests beautifulsoup4
