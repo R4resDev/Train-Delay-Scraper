@@ -3,7 +3,13 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-urls = ["https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Targoviste/Bucuresti-Nord", "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Bucuresti-Nord/Targoviste"]
+urls = [
+    "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Targoviste/Bucuresti-Nord",
+    "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Bucuresti-Nord/Targoviste",
+    "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Targoviste/Bucuresti-Basarab-h",
+    "https://mersultrenurilor.infofer.ro/ro-RO/Rute-trenuri/Bucuresti-Basarab-h/Targoviste"
+]
+
 for url in urls:
     departureStationName = url.split("/")[-2]
     arrivalStationName = url.split("/")[-1]
@@ -72,7 +78,7 @@ for url in urls:
     all_lists = soup.find_all("li")
     trains = []
     for li in all_lists:
-        if li.has_attr("id") and li["id"].startswith("li-itinerary-"):
+        if li.has_attr("id") and li["id"].startswith("li-itinerary-") and li.find(class_ = "badge badge-light text-0-7rem"):
             trains.append(li)
 
     os.makedirs("data", exist_ok=True)
